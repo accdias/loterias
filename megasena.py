@@ -6,12 +6,12 @@ from io import BytesIO
 from zipfile import ZipFile
 from datetime import datetime
 
-megasena_zip_file = 'http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_megase.zip'
-megasena_html_file = 'D_MEGA.HTM'
+zip_file = 'http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_megase.zip'
+html_file = 'D_MEGA.HTM'
 
-with requests.get(megasena_zip_file) as request:
+with requests.get(zip_file) as request:
     if request.ok:
-        with ZipFile(BytesIO(request.content)).open(megasena_html_file) as html:
+        with ZipFile(BytesIO(request.content)).open(html_file) as html:
             db = sqlite3.connect('megasena.db')
             db.execute('''
                 DROP TABLE IF EXISTS polls;
