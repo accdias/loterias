@@ -1,3 +1,3 @@
 # Loterias
 
-Simple Python 3 scripts to parse Brazilian Lotteris's history result files trhough web scrapping
+Simple Python 3 scripts to parse Brazilian lotteries's result files through web scrapping.
