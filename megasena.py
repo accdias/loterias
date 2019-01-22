@@ -12,11 +12,10 @@ megasena_html_file = 'D_MEGA.HTM'
 with requests.get(megasena_zip_file) as request:
     if request.ok:
         db = sqlite3.connect('megasena.db')
-        cursor = db.cursor()
-        cursor.execute('''
+        db.execute('''
             DROP TABLE IF EXISTS polls;
             ''')
-        cursor.execute('''
+        db.execute('''
             CREATE TABLE polls (
                 id INTEGER NOT NULL PRIMARY KEY,
                 date DATE NOT NULL,
@@ -33,6 +32,6 @@ with requests.get(megasena_zip_file) as request:
                 td = [tag.get_text() for tag in tr('td', limit=8, rowspan=True)]
                 if td and td[0].isdigit():
                     td[1] = datetime.strptime(td[1], '%d/%m/%Y')
-                    cursor.execute('INSERT INTO polls VALUES (?, ?, ?, ?, ?, ?, ?, ?);', td)
+                    db.execute('INSERT INTO polls VALUES (?, ?, ?, ?, ?, ?, ?, ?);', td)
         db.commit()
         db.close()
